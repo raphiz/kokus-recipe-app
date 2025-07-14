@@ -21,17 +21,17 @@ perSystem.devshell.mkShell ({config, ...}: {
     {
       name = "build";
       help = "compiles, runs tests, and reports success or failure";
-      command = ''gradle :clean :check :installDist'';
+      command = ''gradle clean check :infrastructure:app:installDist'';
     }
     {
       name = "build-continuously";
       help = "automatically run build when files change";
-      command = ''gradle --continuous :check :installDist'';
+      command = ''gradle --continuous check :infrastructure:app:installDist'';
     }
     {
       name = "rundev";
       help = "run the software locally for manual review and testing";
-      command = ''gradle :run'';
+      command = ''gradle :infrastructure:app:run'';
     }
     {
       name = "module-test";

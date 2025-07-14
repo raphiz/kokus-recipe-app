@@ -1,4 +1,4 @@
-package com.example
+package li.raphael.kokus
 
 import com.sun.net.httpserver.HttpExchange
 import com.sun.net.httpserver.HttpHandler

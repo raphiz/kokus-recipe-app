@@ -1,10 +1,9 @@
-rootProject.name = "kokus"
+rootProject.name = "kokus-plugins"
 
 pluginManagement {
     repositories {
         gradlePluginPortal()
     }
-    includeBuild("gradle/plugins")
 }
 
 dependencyResolutionManagement {
@@ -13,5 +12,3 @@ dependencyResolutionManagement {
     }
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
 }
-
-include(":infrastructure:app")

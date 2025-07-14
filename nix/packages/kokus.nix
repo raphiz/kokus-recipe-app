@@ -11,6 +11,9 @@ in
   buildGradleApplication {
     inherit pname;
 
+    buildTask = ":infrastructure:app:installDist";
+    installLocation = "infrastructure/app/build/install/*/";
+
     # remove the `-dirty` suffix to avoid unnecessary rebuilds in local dev.
     version = lib.removeSuffix "-dirty" (flake.shortRev or flake.dirtyShortRev);
 

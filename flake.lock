@@ -31,11 +31,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1740030529,
-        "narHash": "sha256-7K1TdRTaxGHj/rIkLLs5bu7CCemdddki24MVaiK5WbU=",
+        "lastModified": 1752519920,
+        "narHash": "sha256-eGHok2E1CkOw6bWvoPmQzaUOKG03FSCuaaebKIiVVLM=",
         "owner": "raphiz",
         "repo": "buildGradleApplication",
-        "rev": "d004d73743b4974c932505c0009341c647844341",
+        "rev": "39ab21ba9c4def5cefa37ecadcda9777584a8f2d",
         "type": "github"
       },
       "original": {
