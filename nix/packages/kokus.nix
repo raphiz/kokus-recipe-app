@@ -24,7 +24,7 @@ in
       # set default for meta.mainProgram here to gain compatibility with:
       # `lib.getExe`, `nix run`, `nix bundle`, etc.
       mainProgram = pname;
-      license = lib.licenses.mit; # TODO: Change license (if necessary)
+      license = lib.licenses.mit;
       description = "Kokus Recipe Management";
     };
 
