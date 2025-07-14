@@ -34,9 +34,9 @@ perSystem.devshell.mkShell ({config, ...}: {
       command = ''gradle :run'';
     }
     {
-      name = "integration-test";
-      help = "run integration tests in a production-like environment";
-      command = "nix build .#checks.${system}.integrationTest";
+      name = "module-test";
+      help = "run module integration tests in a production-like environment";
+      command = "nix build .#checks.${system}.module-test";
     }
     {
       name = "lint";
