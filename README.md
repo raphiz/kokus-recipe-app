@@ -1,14 +1,12 @@
-# Kotlin + Gradle + Nix = ❤️
+# Kokus Recipe Management
 
-This is an example starter template for your next Kotlin JVM app.
+Kokus is a simple recipe management and meal planning application. As a personal project, it serves as a playground for exploring methodologies and technologies.
 
-The template offers a ready-to-start project skeleton and development environment including linting (ktlint, detekt, sqlfluff and more), a [nix derivation](https://nix.dev/manual/nix/2.24/language/derivations) and a NixOS module (with tests!).
+The template offers a ready-to-start project skeleton and development environment including linting (), a [nix derivation](https://nix.dev/manual/nix/2.24/language/derivations) and a NixOS module (with tests!).
 
 ## Prerequisites
 
-This project requires [Nix](https://nixos.org/) with [flakes](https://nixos.wiki/wiki/Flakes) support for both the development and the build process - but nothing else!
-
-## Development Environment
+This project requires [Nix](https://nixos.org/) with [flakes](https://nixos.wiki/wiki/Flakes) support for the development (ktlint, detekt, sqlfluff and more), build and deployment process.
 
 ```bash
 # Manually start development environment ...
@@ -18,19 +16,3 @@ direnv allow
 ```
 
 You will be greeted with a list of all available commands.
-
-## Make the template your own
-
-- Search and replace `Example Application` and `example` (including folder names)
-- Search for `TODO` to ensure you set licenses etc. properly
-- Replace the Project license
-- Have fun 🚀
-
-## Further Resources
-
-This repo just glues the awesome work of others together.
-
-- [blueprint](https://github.com/numtide/blueprint)
-- [devshell](https://github.com/numtide/devshell)
-- [pre commit](https://pre-commit.com/) and [git-hooks.nix](github.com/cachix/git-hooks.nix)
-- [buildGradleApplication](https://github.com/raphiz/buildGradleApplication)
