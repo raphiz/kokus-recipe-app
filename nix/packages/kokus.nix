@@ -1,4 +1,5 @@
 {
+  flake,
   pname,
   pkgs,
   perSystem,
@@ -10,12 +11,8 @@ in
   buildGradleApplication {
     inherit pname;
 
-    # TODO: Decide on a version schema
-    # Specify it manually
-    version = "1.0.0";
-    # or set the commit hash as version
     # remove the `-dirty` suffix to avoid unnecessary rebuilds in local dev.
-    # version = lib.removeSuffix "-dirty" (flake.shortRev or flake.dirtyShortRev);
+    version = lib.removeSuffix "-dirty" (flake.shortRev or flake.dirtyShortRev);
 
     # TODO: consider filtering here to prevent unnecessary rebuilds
     src = ./../..;
