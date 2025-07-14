@@ -1,0 +1,18 @@
+# direnv
+.direnv/
+.envrc.local
+
+# nix
+result
+result-*
+
+.pre-commit-config.yaml
+.bin
+
+# gradle
+.gradle/
+build/
+
+# intelliJ
+out/
+.idea/
