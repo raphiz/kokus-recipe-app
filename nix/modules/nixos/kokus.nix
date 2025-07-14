@@ -4,47 +4,47 @@
   pkgs,
   ...
 }: let
-  cfg = config.services.example;
+  cfg = config.services.kokus;
 in {
   options = {
-    services.example = {
-      enable = lib.mkEnableOption "Enable Example Application";
+    services.kokus = {
+      enable = lib.mkEnableOption "Kokus Recipe Management";
 
       package = lib.mkOption {
         type = lib.types.package;
-        default = pkgs.example;
+        default = pkgs.kokus;
         description = "Application package to use.";
       };
 
       user = lib.mkOption {
         type = lib.types.str;
-        default = "example";
-        description = "User account under which Example Application runs";
+        default = "kokus";
+        description = "User account under which Kokus runs";
       };
 
       port = lib.mkOption {
         type = lib.types.port;
         default = 8000;
-        description = "The port on which Example Application listens.";
+        description = "The port on which Kokus listens.";
       };
     };
   };
 
   config = lib.mkIf cfg.enable {
-    users.users.example =
-      lib.mkIf (cfg.user == "example")
+    users.users.kokus =
+      lib.mkIf (cfg.user == "kokus")
       {
-        name = "example";
+        name = "kokus";
         isSystemUser = true;
-        group = "example";
-        description = "Example Application server user";
+        group = "kokus";
+        description = "Kokus server user";
       };
-    users.groups.example = lib.mkIf (cfg.user == "example") {};
+    users.groups.kokus = lib.mkIf (cfg.user == "kokus") {};
 
     environment.systemPackages = [cfg.package];
 
-    systemd.services.example = {
-      description = "Example Application";
+    systemd.services.kokus = {
+      description = "Kokus Recipe Management";
 
       wantedBy = ["multi-user.target"];
       after = ["network.target"];

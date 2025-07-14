@@ -1,1 +1,1 @@
-{perSystem, ...}: perSystem.self.example
+{perSystem, ...}: perSystem.self.kokus

@@ -7,7 +7,7 @@
 }:
 perSystem.devshell.mkShell ({config, ...}: {
   devshell = {
-    name = ''Example Application'';
+    name = ''Kokus: Recipe Management'';
     startup.pre-commit.text = ''if [ -z "''${CI:-}" ]; then ${flake.checks.${system}.linters.shellHook} fi'';
   };
 

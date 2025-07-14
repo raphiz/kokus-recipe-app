@@ -1,4 +1,4 @@
-rootProject.name = "example-app"
+rootProject.name = "kokus"
 
 pluginManagement {
     repositories {

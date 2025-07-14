@@ -25,7 +25,7 @@ in
       # `lib.getExe`, `nix run`, `nix bundle`, etc.
       mainProgram = pname;
       license = lib.licenses.mit; # TODO: Change license (if necessary)
-      description = "Example Application";
+      description = "Kokus Recipe Management";
     };
 
     jdk = defaultJava;

@@ -6,17 +6,17 @@
 }:
 pkgs.nixosTest (
   {...}: let
-    serverDomain = "example.local";
+    serverDomain = "kokus.local";
     serverPort = 4242;
   in {
-    name = "Example Application integration test";
+    name = "Kokus NixOS Module Test";
     nodes = {
       server = {...}: {
-        imports = [flake.nixosModules.example];
+        imports = [flake.nixosModules.kokus];
 
-        services.example = {
+        services.kokus = {
           enable = true;
-          package = flake.packages.${system}.example;
+          package = flake.packages.${system}.kokus;
           port = serverPort;
         };
 
@@ -31,7 +31,7 @@ pkgs.nixosTest (
 
     testScript = ''
       start_all()
-      server.wait_for_unit("example.service")
+      server.wait_for_unit("kokus.service")
       server.wait_until_succeeds("curl -f -L http://${serverDomain}:${toString serverPort}/")
     '';
   }
