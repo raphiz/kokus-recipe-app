@@ -11,7 +11,7 @@ in
   buildGradleApplication {
     inherit pname;
 
-    buildTask = ":infrastructure:app:installDist";
+    buildTask = ":assemble";
     installLocation = "infrastructure/app/build/install/*/";
 
     # remove the `-dirty` suffix to avoid unnecessary rebuilds in local dev.
