@@ -1,9 +1,9 @@
+import li.raphael.kokus.feature
+
 plugins {
-    id("li.raphael.kokus.module")
+    id("li.raphael.kokus.feature-module")
 }
 
 dependencies {
-    implementation(projects.domain.recipeCollection)
-
-    implementation(projects.infrastructure.base)
+    domainApi(feature(project(":domain:recipe-collection"), "domain"))
 }

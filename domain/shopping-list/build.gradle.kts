@@ -1,3 +1,3 @@
 plugins {
-    id("li.raphael.kokus.module")
+    id("li.raphael.kokus.feature-module")
 }
