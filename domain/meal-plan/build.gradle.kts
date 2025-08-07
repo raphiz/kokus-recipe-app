@@ -5,5 +5,5 @@ plugins {
 }
 
 dependencies {
-    domainApi(feature(project(":domain:recipe-collection"), "domain"))
+    implementation(feature(project(":domain:recipe-collection"), "domain"))
 }
