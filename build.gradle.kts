@@ -1,5 +1,24 @@
+import li.raphael.kokus.Persons
+
 plugins {
     id("li.raphael.kokus.root")
+    id("li.raphael.kokus.c4.diagrams")
+}
+
+c4Diagrams {
+    title = "Kokus"
+    description =
+        """
+        Enables households to collect and manage recipes, plan meals, and maintain shared shopping lists
+        """.trimIndent()
+    technology = "Kotlin / JVM"
+    relations {
+        incoming(
+            from = Persons.householdMember,
+            description = "collects recipes, plans meals, and maintains a shared shopping list in",
+            protocol = "HTTP",
+        )
+    }
 }
 
 val taskGroup = "Kokus"

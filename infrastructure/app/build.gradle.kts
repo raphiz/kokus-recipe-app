@@ -3,6 +3,11 @@ plugins {
     application
 }
 
+c4Container {
+    description = "Bundles together all feature modules into a runnable artifact"
+    hidden = true
+}
+
 application {
     applicationName = "kokus"
     mainClass.set("li.raphael.kokus.MainKt")

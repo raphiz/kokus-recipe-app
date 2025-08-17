@@ -9,6 +9,13 @@ kotlin {
     }
 }
 
+dependencies {
+    testImplementation("org.junit.jupiter:junit-jupiter-api")
+    testImplementation(platform("org.junit:junit-bom:5.13.4"))
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
+}
+
 tasks.test {
     useJUnitPlatform()
     testLogging {
