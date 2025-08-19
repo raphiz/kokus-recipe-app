@@ -3,14 +3,22 @@ plugins {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlin.jvm:org.jetbrains.kotlin.jvm.gradle.plugin:2.2.0")
+    implementation(
+        libs.plugins.kotlin.jvm
+            .asDependency(),
+    )
 
-    implementation("com.structurizr:structurizr-client:4.1.0")
-    implementation("com.structurizr:structurizr-autolayout:4.1.0")
-    implementation("com.structurizr:structurizr-export:4.1.0")
-    implementation("net.sourceforge.plantuml:plantuml:1.2025.4")
+    implementation(libs.structurizr.client)
+    implementation(libs.structurizr.autolayout)
+    implementation(libs.structurizr.export)
+    implementation(libs.plantuml)
 }
 
 tasks.validatePlugins.configure {
     enableStricterValidation = true
 }
+
+fun Provider<PluginDependency>.asDependency(): String =
+    map {
+        "${it.pluginId}:${it.pluginId}.gradle.plugin:${it.version}"
+    }.get()

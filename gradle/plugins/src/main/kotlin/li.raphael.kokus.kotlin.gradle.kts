@@ -9,11 +9,15 @@ kotlin {
     }
 }
 
+val Project.libs get() = extensions.getByType<VersionCatalogsExtension>().named("libs")
+
+operator fun VersionCatalog.get(name: String) = findLibrary(name).get()
+
 dependencies {
-    testImplementation("org.junit.jupiter:junit-jupiter-api")
-    testImplementation(platform("org.junit:junit-bom:5.13.4"))
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
+    testImplementation(platform(libs["junit-bom"]))
+    testImplementation(libs["junit-jupiter-api"])
+    testRuntimeOnly(libs["junit-platform-launcher"])
+    testRuntimeOnly(libs["junit-jupiter-engine"])
 }
 
 tasks.test {
