@@ -12,7 +12,7 @@ in
     inherit pname;
 
     buildTask = ":assemble";
-    installLocation = "subsystems/composition/build/install/*/";
+    installLocation = "subsystems/assembly/build/install/*/";
 
     # remove the `-dirty` suffix to avoid unnecessary rebuilds in local dev.
     version = lib.removeSuffix "-dirty" (flake.shortRev or flake.dirtyShortRev);

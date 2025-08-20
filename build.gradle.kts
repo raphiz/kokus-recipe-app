@@ -28,13 +28,13 @@ val taskGroup = "Kokus"
 tasks.register("run").configure {
     group = taskGroup
     description = "Run the application locally for manual review and testing"
-    dependsOn(project(":subsystems:composition").tasks.named("run"))
+    dependsOn(project(":subsystems:assembly").tasks.named("run"))
 }
 
 tasks.named("assemble").configure {
     group = taskGroup
     description = "Assemble application distribution artifacts for deployment"
-    dependsOn(project(":subsystems:composition").tasks.named("installDist"))
+    dependsOn(project(":subsystems:assembly").tasks.named("installDist"))
 }
 
 tasks.named("check").configure {
