@@ -3,10 +3,7 @@ plugins {
 }
 
 dependencies {
-    implementation(
-        libs.plugins.kotlin.jvm
-            .asDependency(),
-    )
+    implementation(pluginMarker(libs.plugins.kotlin.jvm))
 
     implementation(libs.structurizr.client)
     implementation(libs.structurizr.autolayout)
@@ -18,7 +15,7 @@ tasks.validatePlugins.configure {
     enableStricterValidation = true
 }
 
-fun Provider<PluginDependency>.asDependency(): String =
-    map {
-        "${it.pluginId}:${it.pluginId}.gradle.plugin:${it.version}"
-    }.get()
+fun pluginMarker(provider: Provider<PluginDependency>): String {
+    val plugin = provider.get()
+    return "${plugin.pluginId}:${plugin.pluginId}.gradle.plugin:${plugin.version}"
+}
