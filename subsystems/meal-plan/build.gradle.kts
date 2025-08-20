@@ -18,7 +18,7 @@ c4Container {
 }
 
 dependencies {
-    implementation(feature(project(":subsystems:recipe-collection"), "domain")) {
+    implementation(feature(projects.subsystems.recipeCollection, "domain")) {
         because("uses recipes from")
     }
 }
