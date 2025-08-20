@@ -1,22 +1,39 @@
 package li.raphael.kokus
 
+import org.gradle.api.Project
 import org.gradle.api.artifacts.Dependency
 import org.gradle.api.artifacts.ModuleDependency
 import org.gradle.api.artifacts.ProjectDependency
 import org.gradle.api.artifacts.dsl.DependencyHandler
+import org.gradle.api.plugins.JavaPluginExtension
+import org.gradle.api.tasks.SourceSet
+import org.gradle.api.tasks.SourceSetContainer
+import org.gradle.kotlin.dsl.getByType
 
 // This does the same as the `testFixtures` function
 // See https://github.com/gradle/gradle/blob/674b8430b024f03cae24f1e4dd6dbaa78b557dae/platforms/software/dependency-management/src/main/java/org/gradle/api/internal/artifacts/dsl/dependencies/DefaultDependencyHandler.java#L369
-fun DependencyHandler.feature(
+fun DependencyHandler.facet(
     projectPath: ProjectDependency,
-    featureName: String,
+    facetName: String,
 ): Dependency {
-    val featureDependency = create(projectPath)
-    require(featureDependency is ModuleDependency)
+    val facetDependency = create(projectPath)
+    require(facetDependency is ModuleDependency)
 
-    featureDependency.capabilities {
-        requireFeature(featureName)
+    facetDependency.capabilities {
+        requireFeature(facetName)
     }
 
-    return featureDependency
+    return facetDependency
+}
+
+fun Project.registerFacet(facetName: String): SourceSet {
+    val sourceSets = extensions.getByType<SourceSetContainer>()
+    val java = extensions.getByType<JavaPluginExtension>()
+
+    val facetSourceSet = sourceSets.maybeCreate(facetName)
+    java.registerFeature(facetName) {
+        usingSourceSet(facetSourceSet)
+    }
+
+    return facetSourceSet
 }

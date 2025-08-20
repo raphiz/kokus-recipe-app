@@ -4,7 +4,7 @@ plugins {
 }
 
 c4Container {
-    description = "Bundles together all feature modules into a runnable artifact"
+    description = "Bundles together all modules into a runnable artifact"
     hidden = true
 }
 

@@ -1,5 +1,5 @@
 import li.raphael.kokus.Persons
-import li.raphael.kokus.feature
+import li.raphael.kokus.facet
 
 plugins {
     id("li.raphael.kokus.feature-module")
@@ -17,7 +17,7 @@ c4Container {
 }
 
 dependencies {
-    implementation(feature(projects.app.mealPlan, "domain")) {
+    implementation(facet(projects.app.mealPlan, "domain")) {
         because("derives ingredients from")
     }
 }

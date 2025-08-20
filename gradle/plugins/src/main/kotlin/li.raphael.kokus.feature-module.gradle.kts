@@ -1,15 +1,13 @@
-import li.raphael.kokus.feature
+import li.raphael.kokus.facet
+import li.raphael.kokus.registerFacet
 
 plugins {
     id("li.raphael.kokus.module")
 }
 
-val domain = sourceSets.maybeCreate("domain")
-java.registerFeature(domain.name) {
-    usingSourceSet(domain)
-}
+val domain = registerFacet("domain")
 
 dependencies {
-    implementation(feature(project(path), domain.name))
+    implementation(facet(project(path), domain.name))
     domain.apiConfigurationName(project(":app:fundamentals"))
 }
