@@ -16,8 +16,8 @@ dependencyResolutionManagement {
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
-include(":domain:meal-plan")
-include(":domain:recipe-collection")
-include(":domain:shopping-list")
+include(":subsystems:meal-plan")
+include(":subsystems:recipe-collection")
+include(":subsystems:shopping-list")
 include(":infrastructure:app")
 include(":infrastructure:base")
