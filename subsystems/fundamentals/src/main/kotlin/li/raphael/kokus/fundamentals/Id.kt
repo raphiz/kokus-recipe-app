@@ -1,4 +1,4 @@
-package li.raphael.kokus.base
+package li.raphael.kokus.fundamentals
 
 import java.lang.reflect.Constructor
 import java.util.UUID

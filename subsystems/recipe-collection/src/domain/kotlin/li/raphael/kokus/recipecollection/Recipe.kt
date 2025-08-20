@@ -1,6 +1,6 @@
 package li.raphael.kokus.recipecollection
 
-import li.raphael.kokus.base.RecipeId
+import li.raphael.kokus.fundamentals.RecipeId
 
 data class Recipe(
     val id: RecipeId,
