@@ -16,8 +16,8 @@ dependencyResolutionManagement {
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
-include(":subsystems:assembly")
-include(":subsystems:fundamentals")
-include(":subsystems:meal-plan")
-include(":subsystems:recipe-collection")
-include(":subsystems:shopping-list")
+include(":app:assembly")
+include(":app:fundamentals")
+include(":app:meal-plan")
+include(":app:recipe-collection")
+include(":app:shopping-list")

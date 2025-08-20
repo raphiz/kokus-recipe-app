@@ -17,7 +17,7 @@ c4Container {
 }
 
 dependencies {
-    implementation(feature(projects.subsystems.mealPlan, "domain")) {
+    implementation(feature(projects.app.mealPlan, "domain")) {
         because("derives ingredients from")
     }
 }

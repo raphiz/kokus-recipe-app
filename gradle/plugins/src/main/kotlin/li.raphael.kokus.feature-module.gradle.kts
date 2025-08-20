@@ -11,5 +11,5 @@ java.registerFeature(domain.name) {
 
 dependencies {
     implementation(feature(project(path), domain.name))
-    domain.apiConfigurationName(project(":subsystems:fundamentals"))
+    domain.apiConfigurationName(project(":app:fundamentals"))
 }
