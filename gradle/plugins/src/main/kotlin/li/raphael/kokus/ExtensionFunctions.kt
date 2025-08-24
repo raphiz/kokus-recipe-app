@@ -1,11 +1,10 @@
 package li.raphael.kokus
 
 import org.gradle.api.Project
-import org.gradle.api.artifacts.Dependency
-import org.gradle.api.artifacts.ModuleDependency
-import org.gradle.api.artifacts.ProjectDependency
+import org.gradle.api.artifacts.*
 import org.gradle.api.artifacts.dsl.DependencyHandler
 import org.gradle.api.plugins.JavaPluginExtension
+import org.gradle.api.provider.Provider
 import org.gradle.api.tasks.SourceSet
 import org.gradle.api.tasks.SourceSetContainer
 import org.gradle.kotlin.dsl.getByType
@@ -52,3 +51,11 @@ fun Project.registerFacet(facetName: String): SourceSet {
 
     return facetSourceSet
 }
+
+val Project.libs: VersionCatalog
+    get() = extensions.getByType<VersionCatalogsExtension>().named("libs")
+
+operator fun VersionCatalog.invoke(alias: String): Provider<MinimalExternalModuleDependency> =
+    findLibrary(alias).orElseThrow {
+        error("version catalog 'libs' has no library alias '$alias'")
+    }
