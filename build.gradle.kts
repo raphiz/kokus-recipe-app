@@ -28,24 +28,23 @@ val taskGroup = "Kokus"
 tasks.register("run").configure {
     group = taskGroup
     description = "Run the application locally for manual review and testing"
-    dependsOn(project(":app:assembly").tasks.named("run"))
+    dependsOn(":app:assembly:run")
 }
 
 tasks.named("assemble").configure {
     group = taskGroup
     description = "Assemble application distribution artifacts for deployment"
-    dependsOn(project(":app:assembly").tasks.named("installDist"))
+    dependsOn(":app:assembly:installDist")
 }
 
 tasks.named("check").configure {
     group = taskGroup
     description = "Run all tests"
 
-    // Safely aggregate existing 'check' tasks from subprojects skipping projects without one
     val checkTasks =
-        subprojects.mapNotNull {
-            runCatching { it.tasks.named("check") }.getOrNull()
-        }
+        subprojects
+            .filter { it.buildFile.isFile } // skip synthetic parent projects
+            .map { "${it.path}:check" }
     dependsOn(checkTasks)
 }
 
@@ -53,11 +52,10 @@ tasks.named("clean") {
     group = taskGroup
     description = "Clean all projects"
 
-    // Safely aggregate existing 'clean' tasks from subprojects skipping projects without one
     val cleanTasks =
-        subprojects.mapNotNull {
-            runCatching { it.tasks.named("clean") }.getOrNull()
-        }
+        subprojects
+            .filter { it.buildFile.isFile } // skip synthetic parent projects
+            .map { "${it.path}:clean" }
     dependsOn(cleanTasks)
 }
 
