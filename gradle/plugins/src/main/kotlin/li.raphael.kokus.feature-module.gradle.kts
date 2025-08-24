@@ -1,11 +1,11 @@
 import li.raphael.kokus.facet
-import li.raphael.kokus.registerFacet
+import li.raphael.kokus.registeringFacet
 
 plugins {
     id("li.raphael.kokus.module")
 }
 
-val domain = registerFacet("domain")
+val domain by registeringFacet()
 
 dependencies {
     implementation(facet(project(path), domain.name))
