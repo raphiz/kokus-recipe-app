@@ -8,7 +8,7 @@
 perSystem.devshell.mkShell ({config, ...}: {
   devshell = {
     name = ''Kokus: Recipe Management'';
-    startup.pre-commit.text = ''if [ -z "''${CI:-}" ]; then ${flake.checks.${system}.linters.shellHook} fi'';
+    startup.pre-commit.text = flake.checks.${system}.linters.shellHook;
   };
 
   packages =
