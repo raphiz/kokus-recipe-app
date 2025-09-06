@@ -1,0 +1,47 @@
+{
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "extends": [
+        "config:best-practices",
+        "mergeConfidence:all-badges",
+        ":disableDependencyDashboard"
+    ],
+    "ignorePresets": [":ignoreModulesAndTests", "workarounds:javaLTSVersions"],
+    "packageRules": [
+        {
+            "matchUpdateTypes": ["minor", "patch"],
+            "automerge": true
+        },
+        {
+            "matchDepNames": "net.sourceforge.plantuml:plantuml",
+            "allowedVersions": "/^[0-9]+\\.[0-9]+\\.[0-9]+$/"
+        }
+    ],
+    "customManagers": [
+        {
+            "customType": "regex",
+            "description": "Update Gradle Java Version",
+            "fileMatch": ["(^|.*/).*.gradle(.kts)?$"],
+            "matchStrings": ["jvmToolchain\\((?<currentValue>\\d+)\\)"],
+            "datasourceTemplate": "java-version",
+            "depNameTemplate": "java",
+            "extractVersionTemplate": "^(?<version>\\d+)"
+        },
+        {
+            "customType": "regex",
+            "description": "Update Nix Java Version",
+            "fileMatch": ["\\.nix$"],
+            "matchStrings": ["temurin-bin-(?<currentValue>\\d+)"],
+            "datasourceTemplate": "java-version",
+            "depNameTemplate": "java",
+            "extractVersionTemplate": "^(?<version>\\d+)"
+        }
+    ],
+    "nix": {
+        "enabled": true
+    },
+    "lockFileMaintenance": {
+        "enabled": true,
+        "extends": ["schedule:weekly"]
+    },
+    "reviewers": ["raphiz"]
+}
