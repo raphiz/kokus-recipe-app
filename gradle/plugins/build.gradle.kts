@@ -3,6 +3,7 @@ plugins {
 }
 
 dependencies {
+    implementation(pluginMarker(libs.plugins.versionCatalogLinter))
     implementation(pluginMarker(libs.plugins.kotlin.jvm))
 
     implementation(pluginMarker(libs.plugins.jooq.codegen))

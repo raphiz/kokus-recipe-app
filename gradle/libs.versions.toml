@@ -1,31 +1,28 @@
 [versions]
 flyway = "11.12.0"
 jooq = "3.20.6"
-kotlin = "2.2.10"
-structurizr = "4.1.0"
-plantuml = "1.2025.4"
 junit = "5.13.4"
+kotlin = "2.2.10"
+plantuml = "1.2025.4"
 postgresql = "42.7.7"
+structurizr = "4.1.0"
 
 [libraries]
-structurizr-client = { module = "com.structurizr:structurizr-client", version.ref = "structurizr" }
-structurizr-autolayout = { module = "com.structurizr:structurizr-autolayout", version.ref = "structurizr" }
-structurizr-export = { module = "com.structurizr:structurizr-export", version.ref = "structurizr" }
-
-plantuml = { module = "net.sourceforge.plantuml:plantuml", version.ref = "plantuml" }
-postgresql = { module = "org.postgresql:postgresql", version.ref = "postgresql" }
-
-flyway-core = { module = "org.flywaydb:flyway-core", version.ref = "flyway" }
-flyway-postgresql = { module = "org.flywaydb:flyway-database-postgresql", version.ref = "flyway" }
-
-jooq = { module = "org.jooq:jooq", version.ref = "jooq" }
-jooq-meta = { module = "org.jooq:jooq-meta", version.ref = "jooq" }
-
-junit-bom = { module = "org.junit:junit-bom", version.ref = "junit" }
-junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api" }
-junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine" }
-junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher" }
+flyway-core = { group = "org.flywaydb", name = "flyway-core", version.ref = "flyway" }
+flyway-postgresql = { group = "org.flywaydb", name = "flyway-database-postgresql", version.ref = "flyway" }
+jooq = { group = "org.jooq", name = "jooq", version.ref = "jooq" }
+jooq-meta = { group = "org.jooq", name = "jooq-meta", version.ref = "jooq" }
+junit-bom = { group = "org.junit", name = "junit-bom", version.ref = "junit" }
+junit-jupiter-api = { group = "org.junit.jupiter", name = "junit-jupiter-api" }
+junit-jupiter-engine = { group = "org.junit.jupiter", name = "junit-jupiter-engine" }
+junit-platform-launcher = { group = "org.junit.platform", name = "junit-platform-launcher" }
+plantuml = { group = "net.sourceforge.plantuml", name = "plantuml", version.ref = "plantuml" }
+postgresql = { group = "org.postgresql", name = "postgresql", version.ref = "postgresql" }
+structurizr-autolayout = { group = "com.structurizr", name = "structurizr-autolayout", version.ref = "structurizr" }
+structurizr-client = { group = "com.structurizr", name = "structurizr-client", version.ref = "structurizr" }
+structurizr-export = { group = "com.structurizr", name = "structurizr-export", version.ref = "structurizr" }
 
 [plugins]
 jooq-codegen = { id = "org.jooq.jooq-codegen-gradle", version.ref = "jooq" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+versionCatalogLinter = { id = "io.github.pemistahl.version-catalog-linter", version = "1.1.0" }
