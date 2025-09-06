@@ -5,6 +5,13 @@ plugins {
 dependencies {
     implementation(pluginMarker(libs.plugins.kotlin.jvm))
 
+    implementation(pluginMarker(libs.plugins.jooq.codegen))
+    implementation(libs.jooq.meta)
+
+    implementation(libs.flyway.core)
+    runtimeOnly(libs.flyway.postgresql)
+    runtimeOnly(libs.postgresql)
+
     implementation(libs.structurizr.client)
     implementation(libs.structurizr.autolayout)
     implementation(libs.structurizr.export)

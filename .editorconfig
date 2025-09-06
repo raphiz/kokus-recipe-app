@@ -7,3 +7,6 @@ tab_size = 4
 
 [{*.kt,*.kts}]
 ktlint_standard_no-wildcard-imports = disabled
+
+[app/fundamentals/database/src/jooq/kotlin/**/*.kt]
+ktlint = disabled

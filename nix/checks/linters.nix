@@ -17,6 +17,7 @@ inputs.git-hooks-nix.lib.${system}.run {
         script = pkgs.writeShellScriptBin "detekt-wrapper" ''set -euo pipefail; IFS=','; ${pkgs.detekt}/bin/detekt --build-upon-default-config -c ${../../detekt-config.yml} --auto-correct -i "$*"; unset IFS;'';
       in "${script}/bin/detekt-wrapper";
       files = "\\.(kt|kts)$";
+      excludes = ["app/fundamentals/database/src/jooq/kotlin/.*.kt"];
       language = "system";
     };
     ktlint = {
@@ -29,7 +30,7 @@ inputs.git-hooks-nix.lib.${system}.run {
     sqlfluff = {
       enable = true;
       name = "sqlfluff";
-      entry = "${pkgs.sqlfluff}/bin/sqlfluff lint";
+      entry = "${pkgs.sqlfluff}/bin/sqlfluff fix";
       files = "\\.sql$";
       language = "system";
     };

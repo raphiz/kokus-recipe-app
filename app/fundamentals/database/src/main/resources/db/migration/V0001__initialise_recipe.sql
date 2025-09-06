@@ -1,0 +1,5 @@
+CREATE TABLE recipe
+(
+    id UUID PRIMARY KEY NOT NULL,
+    title TEXT UNIQUE NOT NULL
+);

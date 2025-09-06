@@ -17,6 +17,7 @@ dependencyResolutionManagement {
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 include(":app:assembly")
+include(":app:fundamentals:database")
 include(":app:fundamentals:domain")
 include(":app:meal-plan")
 include(":app:recipe-collection")

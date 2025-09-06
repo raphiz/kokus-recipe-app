@@ -1,0 +1,21 @@
+services:
+    db:
+        image: "postgres:17.6"
+        ports:
+            - "5432:5432"
+        environment:
+            - POSTGRES_USER=localdev
+            - POSTGRES_PASSWORD=*****
+        command: >
+            postgres
+              -c shared_buffers=128MB
+              -c fsync=off
+              -c synchronous_commit=off
+              -c full_page_writes=off
+        # shared_buffers=128MB: Reduce memory usage for caching data pages
+        # fsync=off: Disable disk flush to speed up writes
+        # synchronous_commit=off: Avoid waiting for transaction durability confirmation
+        # full_page_writes=off: Skip full-page WAL writes
+
+        tmpfs:
+            - /var/lib/postgresql/data:rw,noexec,nosuid,size=1g
