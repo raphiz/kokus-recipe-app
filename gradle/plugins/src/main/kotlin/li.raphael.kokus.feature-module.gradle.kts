@@ -9,5 +9,5 @@ val domain by registeringFacet()
 
 dependencies {
     implementation(facet(project(path), domain.name))
-    domain.apiConfigurationName(project(":app:fundamentals"))
+    domain.apiConfigurationName(project(":app:fundamentals:domain"))
 }
