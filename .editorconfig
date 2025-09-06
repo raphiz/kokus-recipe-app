@@ -1,2 +1,9 @@
+root = true
+
+[*]
+indent_style = space
+indent_size = 4
+tab_size = 4
+
 [{*.kt,*.kts}]
 ktlint_standard_no-wildcard-imports = disabled

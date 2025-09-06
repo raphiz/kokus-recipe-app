@@ -33,5 +33,12 @@ inputs.git-hooks-nix.lib.${system}.run {
       files = "\\.sql$";
       language = "system";
     };
+    biome = {
+      enable = true;
+      name = "biome";
+      entry = "${pkgs.biome}/bin/biome check --write --use-editorconfig=true --diagnostic-level=warn";
+      files = "\\.(js|ts|jsx|tsx|json|html|css)$";
+      language = "system";
+    };
   };
 }
