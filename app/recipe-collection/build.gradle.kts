@@ -3,6 +3,7 @@ import li.raphael.kokus.SoftwareSystems
 
 plugins {
     id("li.raphael.kokus.feature-module")
+    id("li.raphael.kokus.feature-module-jooq")
 }
 
 c4Container {
