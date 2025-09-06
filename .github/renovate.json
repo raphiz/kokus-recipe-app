@@ -5,10 +5,16 @@
         "mergeConfidence:all-badges",
         ":disableDependencyDashboard"
     ],
-    "ignorePresets": [":ignoreModulesAndTests", "workarounds:javaLTSVersions"],
+    "ignorePresets": [
+        ":ignoreModulesAndTests",
+        "workarounds:javaLTSVersions"
+    ],
     "packageRules": [
         {
-            "matchUpdateTypes": ["minor", "patch"],
+            "matchUpdateTypes": [
+                "minor",
+                "patch"
+            ],
             "automerge": true
         },
         {
@@ -20,8 +26,12 @@
         {
             "customType": "regex",
             "description": "Update Gradle Java Version",
-            "fileMatch": ["(^|.*/).*.gradle(.kts)?$"],
-            "matchStrings": ["jvmToolchain\\((?<currentValue>\\d+)\\)"],
+            "managerFilePatterns": [
+                "/(^|.*/).*.gradle(.kts)?$/"
+            ],
+            "matchStrings": [
+                "jvmToolchain\\((?<currentValue>\\d+)\\)"
+            ],
             "datasourceTemplate": "java-version",
             "depNameTemplate": "java",
             "extractVersionTemplate": "^(?<version>\\d+)"
@@ -29,8 +39,12 @@
         {
             "customType": "regex",
             "description": "Update Nix Java Version",
-            "fileMatch": ["\\.nix$"],
-            "matchStrings": ["temurin-bin-(?<currentValue>\\d+)"],
+            "managerFilePatterns": [
+                "/\\.nix$/"
+            ],
+            "matchStrings": [
+                "temurin-bin-(?<currentValue>\\d+)"
+            ],
             "datasourceTemplate": "java-version",
             "depNameTemplate": "java",
             "extractVersionTemplate": "^(?<version>\\d+)"
@@ -41,7 +55,11 @@
     },
     "lockFileMaintenance": {
         "enabled": true,
-        "extends": ["schedule:weekly"]
+        "extends": [
+            "schedule:weekly"
+        ]
     },
-    "reviewers": ["raphiz"]
+    "reviewers": [
+        "raphiz"
+    ]
 }
