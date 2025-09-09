@@ -1,8 +1,5 @@
 import gradle.kotlin.dsl.accessors._3a58d6fb01bb07dfb0dff4a5039430f9.sourceSets
-import li.raphael.kokus.FlywayMigrateTask
-import li.raphael.kokus.invoke
-import li.raphael.kokus.libs
-import li.raphael.kokus.registeringFacet
+import li.raphael.kokus.*
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jooq.codegen.gradle.CodegenPluginExtension
 import org.jooq.codegen.gradle.CodegenTask
@@ -11,22 +8,16 @@ plugins {
     id("org.jooq.jooq-codegen-gradle")
 }
 
-// These values must be in sync with configured values in the docker-compose file
-val dbPort = "5432"
-val dbUsername = "localdev"
-val dbPassword = "*****"
-
-val dbJdbcUrl = "jdbc:postgresql://localhost:$dbPort/"
 val dbTemplateDbName = "template1"
 val dbMigrationsLocation = layout.projectDirectory.dir("src/main/resources/db/migration")
-val dbTemplateDbUrl = "${dbJdbcUrl}$dbTemplateDbName"
+val dbTemplateDbUrl = DB_JDBC_URL.map { "${it}$dbTemplateDbName" }
 
 // Use a minimal custom FlywayMigrate task
 // The official flyway Gradle plugin does too much and is not well maintained
 val flywayMigrate by tasks.registering(FlywayMigrateTask::class) {
     url.convention(dbTemplateDbUrl)
-    username.convention(dbUsername)
-    password.convention(dbPassword)
+    username.convention(DB_USERNAME)
+    password.convention(DB_PASSWORD)
     migrationsLocation = dbMigrationsLocation
 }
 
@@ -43,9 +34,9 @@ extensions.configure<CodegenPluginExtension> {
             name = "org.jooq.codegen.KotlinGenerator"
             jdbc {
                 driver = "org.postgresql.Driver"
-                url = dbTemplateDbUrl
-                user = dbUsername
-                password = dbPassword
+                url = dbTemplateDbUrl.get()
+                user = DB_USERNAME.get()
+                password = DB_PASSWORD.get()
             }
             database {
                 name = "org.jooq.meta.postgres.PostgresDatabase"
@@ -79,5 +70,7 @@ tasks.named<CodegenTask>("jooqCodegen").configure {
 }
 
 tasks.named<KotlinCompile>("compileJooqKotlin").configure {
-    dependsOn(tasks.named("jooqCodegen"))
+    if (SKIP_DB.get().lowercase() != "true") {
+        dependsOn(tasks.named("jooqCodegen"))
+    }
 }
