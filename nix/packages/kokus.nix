@@ -11,7 +11,7 @@ in
   buildGradleApplication {
     inherit pname;
 
-    buildTask = ":assemble";
+    buildTask = "-Pdb.skip=true :assemble";
     installLocation = "app/assembly/build/install/*/";
 
     # remove the `-dirty` suffix to avoid unnecessary rebuilds in local dev.

@@ -17,4 +17,5 @@ version = System.getenv("APP_VERSION") ?: "dirty"
 
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
+    implementation(projects.app.recipeCollection)
 }

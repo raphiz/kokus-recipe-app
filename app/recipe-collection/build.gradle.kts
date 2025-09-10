@@ -1,9 +1,14 @@
 import li.raphael.kokus.Persons
 import li.raphael.kokus.SoftwareSystems
+import li.raphael.kokus.facet
 
 plugins {
     id("li.raphael.kokus.feature-module")
     id("li.raphael.kokus.feature-module-jooq")
+}
+
+dependencies {
+    implementation(facet(project(path), "db"))
 }
 
 c4Container {
