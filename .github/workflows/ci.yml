@@ -21,5 +21,6 @@ jobs:
           purge-primary-key: never
           gc-max-store-size: 0
       - run: nix develop --impure --command lint
+      - run: docker compose up -d
       - run: nix develop --impure --command build
       - run: nix develop --impure --command module-test
