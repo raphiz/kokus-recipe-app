@@ -1,5 +1,6 @@
 import gradle.kotlin.dsl.accessors._3a58d6fb01bb07dfb0dff4a5039430f9.sourceSets
 import li.raphael.kokus.*
+import org.gradle.kotlin.dsl.named
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jooq.codegen.gradle.CodegenPluginExtension
 import org.jooq.codegen.gradle.CodegenTask
@@ -53,7 +54,8 @@ extensions.configure<CodegenPluginExtension> {
     }
 }
 
-tasks.named<CodegenTask>("jooqCodegen").configure {
+val jooqCodeGen = tasks.named<CodegenTask>("jooqCodegen")
+jooqCodeGen.configure {
     // DB must be migrated before jOOQ can generate the code.
     // This task can be cached because [[flyway migrations] + [postgres (pinned in docker compose)] + [jooq]] -> generated code.
     dependsOn(flywayMigrate)
@@ -71,6 +73,14 @@ tasks.named<CodegenTask>("jooqCodegen").configure {
 
 tasks.named<KotlinCompile>("compileJooqKotlin").configure {
     if (SKIP_DB.get().lowercase() != "true") {
-        dependsOn(tasks.named("jooqCodegen"))
+        dependsOn(jooqCodeGen)
     }
+}
+
+val checkJooqCodeGenSourcesUpToDate by tasks.registering(CheckFilesCleanTask::class) {
+    enabled = (SKIP_DB.get().lowercase() != "true")
+    targetFiles.from(jooqCodeGen.map { it.outputs.files })
+}
+tasks.named("check").configure {
+    dependsOn(checkJooqCodeGenSourcesUpToDate)
 }
