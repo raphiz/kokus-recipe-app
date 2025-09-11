@@ -7,7 +7,7 @@ plugins {
 
 kotlin {
     compilerOptions {
-        jvmToolchain(21)
+        jvmToolchain(24)
         freeCompilerArgs.set(listOf("-Xjsr305=strict"))
         allWarningsAsErrors = true
     }

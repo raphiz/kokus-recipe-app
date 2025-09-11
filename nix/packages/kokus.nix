@@ -6,7 +6,7 @@
 }: let
   inherit (perSystem.build-gradle-application) buildGradleApplication gradleFromWrapper;
   inherit (pkgs) lib;
-  defaultJava = pkgs.temurin-bin-21;
+  defaultJava = pkgs.temurin-bin-24;
 in
   buildGradleApplication {
     inherit pname;
