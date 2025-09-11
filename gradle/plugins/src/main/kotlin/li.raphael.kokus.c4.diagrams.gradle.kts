@@ -1,3 +1,4 @@
+import li.raphael.kokus.CheckFilesCleanTask
 import li.raphael.kokus.c4.core.DiagramType
 import li.raphael.kokus.c4.gradle.C4DiagramsExtension
 import li.raphael.kokus.c4.gradle.registerRenderDiagramTask
@@ -20,4 +21,11 @@ val diagramTasks =
 // register lifecycle task
 tasks.register("renderDiagrams").configure {
     dependsOn(diagramTasks)
+}
+
+val checkDiagramsUpToDate by tasks.registering(CheckFilesCleanTask::class) {
+    targetFiles.from(diagramTasks.map { provider -> provider.map { it.outputFile } })
+}
+tasks.named("check").configure {
+    dependsOn(checkDiagramsUpToDate)
 }
