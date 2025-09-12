@@ -61,7 +61,7 @@ jooqCodeGen.configure {
     dependsOn(flywayMigrate)
     inputs.files(
         dbMigrationsLocation,
-        rootProject.file("docker-compose.yaml"),
+        rootDir.resolve("docker-compose.yaml"),
     )
 
     // By default, the jOOQ Gradle plugin adds the generated sources to the main source set.
