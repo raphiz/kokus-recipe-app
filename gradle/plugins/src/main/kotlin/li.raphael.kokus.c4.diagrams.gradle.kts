@@ -1,31 +1,45 @@
-import li.raphael.kokus.CheckFilesCleanTask
-import li.raphael.kokus.c4.core.DiagramType
-import li.raphael.kokus.c4.gradle.C4DiagramsExtension
-import li.raphael.kokus.c4.gradle.registerRenderDiagramTask
+@CacheableTask
+abstract class MergeModuleGraphTask : DefaultTask() {
+    @get:InputFiles
+    @get:PathSensitive(PathSensitivity.RELATIVE)
+    abstract val slices: ConfigurableFileCollection
 
-require(project.rootProject == project) { "This plugin must be applied to the root project" }
+    @get:OutputFile
+    abstract val outputFile: RegularFileProperty
 
-val c4DiagramsExtension =
-    extensions.create("c4Diagrams", C4DiagramsExtension::class.java).apply {
-        title.convention(project.name)
-        description.convention("")
+    @TaskAction
+    fun merge() {
+        val parts = slices.files.sortedBy { it.absolutePath }.map { it.readText() }
+        val json =
+            buildString {
+                append("{\"modules\":[")
+                append(parts.joinToString(","))
+                append("]}")
+            }
+        outputFile.get().asFile.also { out ->
+            out.parentFile.mkdirs()
+            out.writeText(json)
+        }
+    }
+}
+
+val merge =
+    tasks.register("writeModuleGraph", MergeModuleGraphTask::class.java) {
+        // fileTree avoids holding other Project instances; it just scans the FS at execution
+        slices.from(
+            fileTree(rootDir) {
+                include("**/build/reports/module-deps.json")
+            },
+        )
+        outputFile.set(layout.buildDirectory.file("reports/module-graph.json"))
     }
 
-// register specific c4 level 1 & level 2 tasks
-val diagramTasks =
-    arrayOf(
-        tasks.registerRenderDiagramTask(DiagramType.CONTAINER, c4DiagramsExtension),
-        tasks.registerRenderDiagramTask(DiagramType.SYSTEM_CONTEXT, c4DiagramsExtension),
-    )
-
-// register lifecycle task
-tasks.register("renderDiagrams").configure {
-    dependsOn(diagramTasks)
-}
-
-val checkDiagramsUpToDate by tasks.registering(CheckFilesCleanTask::class) {
-    targetFiles.from(diagramTasks.map { provider -> provider.map { it.outputFile } })
-}
-tasks.named("check").configure {
-    dependsOn(checkDiagramsUpToDate)
+gradle.allprojects {
+    val subProject = this
+    if (subProject == rootProject) return@allprojects
+    merge.configure {
+        if (subProject.buildFile.exists()) {
+            dependsOn("${subProject.path}:writeModuleDeps")
+        }
+    }
 }
