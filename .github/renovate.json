@@ -19,6 +19,12 @@
             "matchManagers": ["nix"],
             "matchUpdateTypes": ["pinDigest"],
             "enabled": false
+        },
+        {
+            "matchManagers": ["gradle"],
+            "lockFileMaintenance": {
+                "enabled": false
+            }
         }
     ],
     "customManagers": [
