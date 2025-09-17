@@ -14,6 +14,11 @@
         {
             "matchDepNames": "net.sourceforge.plantuml:plantuml",
             "allowedVersions": "/^[0-9]+\\.[0-9]+\\.[0-9]+$/"
+        },
+        {
+            "matchManagers": ["nix"],
+            "matchUpdateTypes": ["pinDigest"],
+            "enabled": false
         }
     ],
     "customManagers": [
