@@ -1,4 +1,3 @@
-import gradle.kotlin.dsl.accessors._3a58d6fb01bb07dfb0dff4a5039430f9.sourceSets
 import li.raphael.kokus.*
 import org.gradle.kotlin.dsl.named
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
@@ -6,6 +5,7 @@ import org.jooq.codegen.gradle.CodegenPluginExtension
 import org.jooq.codegen.gradle.CodegenTask
 
 plugins {
+    java
     id("org.jooq.jooq-codegen-gradle")
 }
 
