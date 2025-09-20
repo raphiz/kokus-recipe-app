@@ -6,12 +6,16 @@
 }: let
   inherit (perSystem.build-gradle-application) buildGradleApplication gradleFromWrapper;
   inherit (pkgs) lib;
-  defaultJava = pkgs.temurin-bin-21;
+  jdk = pkgs.temurin-bin-21;
 in
   buildGradleApplication {
-    inherit pname;
+    inherit pname jdk;
 
-    buildTask = "-Pdb.skip=true :assemble";
+    env = {
+      DB_SKIP = "true";
+    };
+
+    buildTask = ":assemble";
     installLocation = "app/assembly/build/install/*/";
 
     # remove the `-dirty` suffix to avoid unnecessary rebuilds in local dev.
@@ -28,8 +32,5 @@ in
       description = "Kokus Recipe Management";
     };
 
-    jdk = defaultJava;
-    gradle = gradleFromWrapper {
-      wrapperPropertiesPath = ../../gradle/wrapper/gradle-wrapper.properties;
-    };
+    gradle = (gradleFromWrapper ../../gradle/wrapper/gradle-wrapper.properties).override {java = jdk;};
   }
