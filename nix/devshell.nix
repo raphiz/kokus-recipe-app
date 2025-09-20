@@ -5,12 +5,7 @@
   perSystem,
   ...
 }: let
-  buildDeps = flake.packages.${system}.default.nativeBuildInputs;
-  isJdk = pkg:
-    (pkg ? home)
-    || pkgs.lib.hasPrefix "jdk" (pkg.pname or "")
-    || pkgs.lib.hasPrefix "temurin-" (pkg.pname or "");
-  jdk = pkgs.lib.findFirst isJdk (throw "no JDK in nativeBuildInputs") buildDeps;
+  kokus = flake.packages.${system}.kokus;
 in
   perSystem.devshell.mkShell ({config, ...}: {
     devshell = {
@@ -18,16 +13,16 @@ in
       startup.pre-commit.text = flake.checks.${system}.linters.shellHook;
     };
 
-    packages =
-      [
-        perSystem.build-gradle-application.updateVerificationMetadata
-      ]
-      ++ buildDeps;
+    packages = [
+      kokus.jdk
+      kokus.gradle
+      kokus.updateVerificationMetadata
+    ];
 
     env = [
       {
         name = "JAVA_HOME";
-        value = jdk.home;
+        value = kokus.jdk.home;
       }
     ];
 
