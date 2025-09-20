@@ -21,5 +21,8 @@
     inputs.blueprint {
       inherit inputs;
       prefix = "nix";
+      nixpkgs.overlays = [
+        (import ./nix/overlay.nix {inherit inputs;})
+      ];
     };
 }
