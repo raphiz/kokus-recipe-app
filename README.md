@@ -1,6 +1,6 @@
 # Kokus Recipe Management
 
-Kokus is a simple recipe management and meal planning application. As a personal project, it serves as a playground for exploring methodologies and technologies.
+Kokus is a recipe management and meal planning web app. As a personal project, it serves as a playground for exploring methodologies and technologies.
 
 ## Highlights
 
@@ -10,7 +10,7 @@ This project is intentionally a little *over-engineered* – but in a fun way. I
 
 * **Modular Monolith** – domain-oriented structure with a non-cyclic module graph.
 * **Hexagonal architecture per module** – strict classpath separation per layer.
-* **Auto-generated system diagrams** – C4 system context and container diagrams are kept up to date automatically.
+* **Auto-generated system diagrams** – C4 system context and container diagrams update automatically.
 
 ### Development & Tooling
 
@@ -20,7 +20,7 @@ This project is intentionally a little *over-engineered* – but in a fun way. I
 
 ### Testing
 
-* **Production-like integration tests** – full VM (NixOS test) to run module integration in realistic environments.
+* **Production-like integration tests** – full NixOS based VM tests to run module integration in realistic environments.
 
 ### Automation & Distribution
 
@@ -37,4 +37,4 @@ nix develop
 direnv allow
 ```
 
-You will be greeted with a list of all available commands.
+This prints a list of all available commands.
