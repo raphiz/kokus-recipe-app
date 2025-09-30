@@ -2,11 +2,11 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
+    flake-parts.url = "github:hercules-ci/flake-parts";
+
     systems.url = "github:nix-systems/default";
 
-    blueprint.url = "github:numtide/blueprint";
-    blueprint.inputs.nixpkgs.follows = "nixpkgs";
-    blueprint.inputs.systems.follows = "systems";
+    import-tree.url = "github:vic/import-tree";
 
     devshell.url = "github:numtide/devshell";
     devshell.inputs.nixpkgs.follows = "nixpkgs";
@@ -15,13 +15,21 @@
 
     build-gradle-application.url = "github:raphiz/buildGradleApplication";
     build-gradle-application.inputs.nixpkgs.follows = "nixpkgs";
+
+    nix-option-search.url = "github:ciderale/nix-option-search";
+    nix-option-search.inputs.nixpkgs.follows = "nixpkgs";
   };
   outputs = inputs:
-    inputs.blueprint {
-      inherit inputs;
-      prefix = "nix";
-      nixpkgs.overlays = [
-        (import ./nix/overlay.nix {inherit inputs;})
+    inputs.flake-parts.lib.mkFlake {inherit inputs;} {
+      systems = import inputs.systems;
+      imports = [
+        (inputs.import-tree ./nix)
+        inputs.git-hooks-nix.flakeModule # TODO: move into linters?
+        inputs.devshell.flakeModule # TODO: move into devshell?
+        inputs.nix-option-search.modules.flake-parts # TODO: move into ?
       ];
+      perSystem = {pkgs, ...}: {
+        _module.args.lib = pkgs.lib;
+      };
     };
 }
