@@ -1,7 +1,7 @@
 [versions]
 flyway = "11.13.2"
 jooq = "3.20.7"
-junit = "5.13.4"
+junit = "5.14.0"
 kotlin = "2.2.20"
 plantuml = "1.2025.7"
 postgresql = "42.7.8"
