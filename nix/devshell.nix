@@ -1,5 +1,6 @@
 {
   perSystem = {
+    pkgs,
     system,
     config,
     ...
@@ -49,7 +50,7 @@
         {
           name = "lint";
           help = "run all linters - or specific ones when passed as arguments";
-          command = ''pre-commit run --all-files "''${@}"'';
+          command = ''${pkgs.lib.getExe config.pre-commit.settings.package} run --all-files "''${@}"'';
         }
       ];
     };

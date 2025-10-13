@@ -9,6 +9,7 @@
     jdk = config.packages.kokus.jdk;
   in {
     pre-commit.settings = {
+      package = pkgs.prek;
       src = ../.;
 
       hooks = {
