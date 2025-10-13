@@ -26,21 +26,23 @@
         }
       ];
 
-      commands = [
+      commands = let
+        gradleExe = pkgs.lib.getExe kokus.gradle;
+      in [
         {
           name = "build";
           help = "compiles, runs tests, and reports success or failure";
-          command = ''gradle :clean :check :assemble'';
+          command = ''${gradleExe} :clean :check :assemble'';
         }
         {
           name = "build-continuously";
           help = "automatically run build when files change";
-          command = ''gradle --continuous :check :assemble'';
+          command = ''${gradleExe} --continuous :check :assemble'';
         }
         {
           name = "rundev";
           help = "run the software locally for manual review and testing";
-          command = ''gradle :run'';
+          command = ''${gradleExe} :run'';
         }
         {
           name = "module-test";
