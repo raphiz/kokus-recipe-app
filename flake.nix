@@ -22,12 +22,7 @@
   outputs = inputs:
     inputs.flake-parts.lib.mkFlake {inherit inputs;} {
       systems = import inputs.systems;
-      imports = [
-        (inputs.import-tree ./nix)
-        inputs.git-hooks-nix.flakeModule # TODO: move into linters?
-        inputs.devshell.flakeModule # TODO: move into devshell?
-        inputs.nix-option-search.modules.flake-parts # TODO: move into ?
-      ];
+      imports = [./nix];
       perSystem = {pkgs, ...}: {
         _module.args.lib = pkgs.lib;
       };

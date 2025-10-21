@@ -1,4 +1,8 @@
-{
+{inputs, ...}: {
+  imports = [
+    inputs.devshell.flakeModule
+  ];
+
   perSystem = {
     pkgs,
     system,
@@ -7,7 +11,7 @@
   }: let
     kokus = config.packages.kokus;
   in {
-    devshells.kokus = {
+    devshells.default = {
       devshell = {
         name = ''Kokus: Recipe Management'';
         startup.pre-commit.text = config.pre-commit.installationScript;
