@@ -6,8 +6,6 @@
 
     systems.url = "github:nix-systems/default";
 
-    import-tree.url = "github:vic/import-tree";
-
     devshell.url = "github:numtide/devshell";
     devshell.inputs.nixpkgs.follows = "nixpkgs";
 
