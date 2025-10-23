@@ -2,7 +2,7 @@
 flyway = "11.14.1"
 jooq = "3.20.8"
 junit = "6.0.0"
-kotlin = "2.2.20"
+kotlin = "2.2.21"
 plantuml = "1.2025.7"
 postgresql = "42.7.8"
 structurizr = "4.1.0"
