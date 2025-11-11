@@ -1,6 +1,6 @@
 [versions]
 flyway = "11.16.0"
-jooq = "3.20.8"
+jooq = "3.20.9"
 junit = "6.0.1"
 kotlin = "2.2.21"
 plantuml = "1.2025.7"
