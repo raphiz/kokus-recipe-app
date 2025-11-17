@@ -18,4 +18,4 @@ services:
         # full_page_writes=off: Skip full-page WAL writes
 
         tmpfs:
-            - /var/lib/postgresql/data:rw,noexec,nosuid,size=1g
+            - /var/lib/postgresql:rw,noexec,nosuid,size=1g
