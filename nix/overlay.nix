@@ -1,5 +1,5 @@
 {inputs, ...}: final: prev: let
-  jdk = prev.temurin-bin-21;
+  jdk = prev.temurin-bin-25;
 in {
   inherit jdk;
 

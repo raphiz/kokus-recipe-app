@@ -6,7 +6,7 @@
 }: let
   inherit (perSystem.build-gradle-application) buildGradleApplication gradleFromWrapper;
   inherit (pkgs) lib;
-  jdk = pkgs.temurin-bin-21;
+  jdk = pkgs.temurin-bin-25;
 in
   buildGradleApplication {
     inherit pname jdk;
