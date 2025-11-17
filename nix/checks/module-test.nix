@@ -4,7 +4,7 @@
   pkgs,
   ...
 }:
-pkgs.nixosTest (
+pkgs.testers.nixosTest (
   {...}: let
     serverDomain = "kokus.local";
     serverPort = 4242;
