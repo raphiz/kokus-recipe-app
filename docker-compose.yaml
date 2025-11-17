@@ -1,6 +1,6 @@
 services:
     db:
-        image: "postgres:17.7@sha256:5e3334661512bc0783dd748bec4419105ee6aa463d1604d13087c29c4894c83e"
+        image: "postgres:18.1@sha256:41bfa2e5b168fff0847a5286694a86cff102bdc4d59719869f6b117bb30b3a24"
         ports:
             - "5432:5432"
         environment:
@@ -18,4 +18,4 @@ services:
         # full_page_writes=off: Skip full-page WAL writes
 
         tmpfs:
-            - /var/lib/postgresql/data:rw,noexec,nosuid,size=1g
+            - /var/lib/postgresql:rw,noexec,nosuid,size=1g
