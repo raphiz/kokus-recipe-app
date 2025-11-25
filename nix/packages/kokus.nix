@@ -32,5 +32,8 @@ in
       description = "Kokus Recipe Management";
     };
 
-    gradle = (gradleFromWrapper ../../gradle/wrapper/gradle-wrapper.properties).override {java = jdk;};
+    gradle = gradleFromWrapper {
+      wrapperPropertiesPath = ../../gradle/wrapper/gradle-wrapper.properties;
+      defaultJava = jdk;
+    };
   }
