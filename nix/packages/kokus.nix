@@ -25,9 +25,6 @@ in
     src = ./../..;
 
     meta = {
-      # set default for meta.mainProgram here to gain compatibility with:
-      # `lib.getExe`, `nix run`, `nix bundle`, etc.
-      mainProgram = pname;
       license = lib.licenses.mit;
       description = "Kokus Recipe Management";
     };
