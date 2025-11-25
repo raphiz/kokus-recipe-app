@@ -8,7 +8,7 @@
     "ignorePresets": [":ignoreModulesAndTests", "workarounds:javaLTSVersions"],
     "packageRules": [
         {
-            "matchUpdateTypes": ["minor", "patch"],
+            "matchUpdateTypes": ["minor", "patch", "digest"],
             "automerge": true
         },
         {
