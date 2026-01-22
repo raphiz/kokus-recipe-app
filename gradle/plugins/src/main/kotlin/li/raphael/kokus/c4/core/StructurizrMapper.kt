@@ -53,15 +53,17 @@ private fun Workspace.addExternalElements(projects: List<C4Project>) {
         .distinctBy { it.name }
         .forEach { element ->
             when (element) {
-                is C4Element.Person ->
+                is C4Element.Person -> {
                     if (model.getPersonWithName(element.name) == null) {
                         model.addPerson(element.name, element.description)
                     }
+                }
 
-                is C4Element.SoftwareSystem ->
+                is C4Element.SoftwareSystem -> {
                     if (model.getSoftwareSystemWithName(element.name) == null) {
                         model.addSoftwareSystem(element.name, element.description)
                     }
+                }
             }
         }
 }
@@ -187,7 +189,9 @@ private fun StaticStructureElement.addOutgoingRelations(project: C4Project) {
                 this.uses(targetSystem, relation.description, relation.technology)
             }
 
-            is C4Element.Person -> error("An outgoing relation from container to person is not allowed")
+            is C4Element.Person -> {
+                error("An outgoing relation from container to person is not allowed")
+            }
         }
     }
 }
@@ -195,7 +199,7 @@ private fun StaticStructureElement.addOutgoingRelations(project: C4Project) {
 private fun Workspace.createViewFor(diagramType: DiagramType): StaticView {
     val view: StaticView =
         when (diagramType) {
-            DiagramType.CONTAINER ->
+            DiagramType.CONTAINER -> {
                 views
                     .createContainerView(
                         softwareSystem,
@@ -204,6 +208,7 @@ private fun Workspace.createViewFor(diagramType: DiagramType): StaticView {
                     ).apply {
                         addAllContainers()
                     }
+            }
 
             DiagramType.SYSTEM_CONTEXT -> {
                 views
