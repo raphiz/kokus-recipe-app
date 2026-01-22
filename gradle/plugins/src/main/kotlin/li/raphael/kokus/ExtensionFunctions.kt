@@ -8,8 +8,13 @@ import org.gradle.api.provider.Provider
 import org.gradle.api.tasks.SourceSet
 import org.gradle.api.tasks.SourceSetContainer
 import org.gradle.kotlin.dsl.getByType
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
+
+// Ensures Kotlin uses a JVM target it actually supports by falling back to the closest supported one.
+// This is the case when updating to a new JDK version and no new kotlin release is yet available.
+fun JvmTarget.Companion.maxSupportedUpTo(requested: Int) = JvmTarget.entries.last { it.target.substringBefore(".").toInt() <= requested }
 
 // This does the same as the `testFixtures` function
 // See https://github.com/gradle/gradle/blob/674b8430b024f03cae24f1e4dd6dbaa78b557dae/platforms/software/dependency-management/src/main/java/org/gradle/api/internal/artifacts/dsl/dependencies/DefaultDependencyHandler.java#L369

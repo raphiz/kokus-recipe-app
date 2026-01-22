@@ -32,7 +32,7 @@
             "customType": "regex",
             "description": "Update Gradle Java Version",
             "managerFilePatterns": ["/(^|.*/).*.gradle(.kts)?$/"],
-            "matchStrings": ["closestSupportedTo\\((?<currentValue>\\d+)\\)"],
+            "matchStrings": ["maxSupportedUpTo\\((?<currentValue>\\d+)\\)"],
             "datasourceTemplate": "java-version",
             "depNameTemplate": "java",
             "extractVersionTemplate": "^(?<version>\\d+)"
