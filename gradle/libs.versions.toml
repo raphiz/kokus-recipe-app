@@ -5,7 +5,7 @@ junit = "6.0.2"
 kotlin = "2.3.0"
 plantuml = "1.2025.10"
 postgresql = "42.7.9"
-structurizr = "5.0.2"
+structurizr = "5.0.3"
 
 [libraries]
 flyway-core = { group = "org.flywaydb", name = "flyway-core", version.ref = "flyway" }
