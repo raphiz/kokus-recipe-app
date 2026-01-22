@@ -29,17 +29,17 @@ tasks.validatePlugins.configure {
 
 kotlin {
     compilerOptions {
-        jvmTarget.closestSupportedTo(25)
+        // Note: Target compatibility for Gradle uses a more conservative JVM target than production code,
+        // see https://docs.gradle.org/current/userguide/compatibility.html
+        jvmTarget.set(JvmTarget.JVM_21)
         freeCompilerArgs.set(listOf("-Xjsr305=strict"))
         allWarningsAsErrors = true
     }
 }
 
-// Ensures Kotlin uses a JVM target it actually supports by falling back to the closest supported one.
-fun Property<JvmTarget>.closestSupportedTo(requested: Int) =
-    set(
-        JvmTarget.entries.last { it.target.substringBefore(".").toInt() <= requested },
-    )
+// Note: Target compatibility for Gradle uses a more conservative JVM target than production code,
+// see https://docs.gradle.org/current/userguide/compatibility.html
+java.targetCompatibility = JavaVersion.VERSION_21
 
 tasks.withType<KotlinJvmCompile>().configureEach {
     // This is only a good idea for Kotlin-only projects.
