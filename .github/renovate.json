@@ -1,58 +1,58 @@
 {
-    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-    "extends": [
-        "config:best-practices",
-        "mergeConfidence:all-badges",
-        ":disableDependencyDashboard"
-    ],
-    "ignorePresets": [":ignoreModulesAndTests", "workarounds:javaLTSVersions"],
-    "packageRules": [
-        {
-            "matchUpdateTypes": ["minor", "patch", "digest"],
-            "automerge": true
-        },
-        {
-            "matchDepNames": "net.sourceforge.plantuml:plantuml",
-            "allowedVersions": "/^[0-9]+\\.[0-9]+\\.[0-9]+$/"
-        },
-        {
-            "matchManagers": ["nix"],
-            "matchUpdateTypes": ["pinDigest"],
-            "enabled": false
-        },
-        {
-            "matchManagers": ["gradle"],
-            "lockFileMaintenance": {
-                "enabled": false
-            }
-        }
-    ],
-    "customManagers": [
-        {
-            "customType": "regex",
-            "description": "Update Gradle Java Version",
-            "managerFilePatterns": ["/(^|.*/).*.gradle(.kts)?$/"],
-            "matchStrings": ["maxSupportedUpTo\\((?<currentValue>\\d+)\\)"],
-            "datasourceTemplate": "java-version",
-            "depNameTemplate": "java",
-            "extractVersionTemplate": "^(?<version>\\d+)"
-        },
-        {
-            "customType": "regex",
-            "description": "Update Nix Java Version",
-            "managerFilePatterns": ["/\\.nix$/"],
-            "matchStrings": ["temurin-bin-(?<currentValue>\\d+)"],
-            "datasourceTemplate": "java-version",
-            "depNameTemplate": "java",
-            "extractVersionTemplate": "^(?<version>\\d+)"
-        }
-    ],
-    "nix": {
-        "enabled": true
-    },
-    "lockFileMaintenance": {
-        "enabled": true,
-        "extends": ["schedule:weekly"]
-    },
-    "reviewers": ["raphiz"]
+	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
+	"extends": [
+		"config:best-practices",
+		"mergeConfidence:all-badges",
+		":disableDependencyDashboard"
+	],
+	"ignorePresets": [":ignoreModulesAndTests", "workarounds:javaLTSVersions"],
+	"packageRules": [
+		{
+			"matchUpdateTypes": ["minor", "patch", "digest"],
+			"automerge": true
+		},
+		{
+			"matchDepNames": "net.sourceforge.plantuml:plantuml",
+			"allowedVersions": "/^[0-9]+\\.[0-9]+\\.[0-9]+$/"
+		},
+		{
+			"matchManagers": ["nix"],
+			"matchUpdateTypes": ["pinDigest"],
+			"enabled": false
+		},
+		{
+			"matchManagers": ["gradle"],
+			"lockFileMaintenance": {
+				"enabled": false
+			}
+		}
+	],
+	"customManagers": [
+		{
+			"customType": "regex",
+			"description": "Update Gradle Java Version",
+			"managerFilePatterns": ["/(^|.*/).*.gradle(.kts)?$/"],
+			"matchStrings": ["maxSupportedUpTo\\((?<currentValue>\\d+)\\)"],
+			"datasourceTemplate": "java-version",
+			"depNameTemplate": "java",
+			"extractVersionTemplate": "^(?<version>\\d+)"
+		},
+		{
+			"customType": "regex",
+			"description": "Update Nix Java Version",
+			"managerFilePatterns": ["/\\.nix$/"],
+			"matchStrings": ["jdk(?<currentValue>\\d+)"],
+			"datasourceTemplate": "java-version",
+			"depNameTemplate": "java",
+			"extractVersionTemplate": "^(?<version>\\d+)"
+		}
+	],
+	"nix": {
+		"enabled": true
+	},
+	"lockFileMaintenance": {
+		"enabled": true,
+		"extends": ["schedule:weekly"]
+	},
+	"reviewers": ["raphiz"]
 }

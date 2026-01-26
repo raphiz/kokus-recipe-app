@@ -2,26 +2,23 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    systems.url = "github:nix-systems/default";
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    flake-parts.inputs.nixpkgs-lib.follows = "nixpkgs";
 
-    blueprint.url = "github:numtide/blueprint";
-    blueprint.inputs.nixpkgs.follows = "nixpkgs";
-    blueprint.inputs.systems.follows = "systems";
-
-    devshell.url = "github:numtide/devshell";
-    devshell.inputs.nixpkgs.follows = "nixpkgs";
-
-    git-hooks-nix.url = "github:cachix/git-hooks.nix";
+    nix-shell-parts.url = "github:ergon/nix-shell-parts";
+    nix-shell-parts.inputs.nixpkgs.follows = "nixpkgs";
+    nix-shell-parts.inputs.flake-parts.follows = "flake-parts";
 
     build-gradle-application.url = "github:raphiz/buildGradleApplication";
     build-gradle-application.inputs.nixpkgs.follows = "nixpkgs";
+    build-gradle-application.inputs.flake-parts.follows = "flake-parts";
   };
-  outputs = inputs:
-    inputs.blueprint {
-      inherit inputs;
-      prefix = "nix";
-      nixpkgs.overlays = [
-        (import ./nix/overlay.nix {inherit inputs;})
+  outputs = inputs @ {flake-parts, ...}:
+    flake-parts.lib.mkFlake {inherit inputs;} {
+      imports = [
+        ./nix/flake/devshells.nix
+        ./nix/flake/packages.nix
+        ./nix/flake/nixos-modules.nix
       ];
     };
 }

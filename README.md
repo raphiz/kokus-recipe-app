@@ -15,7 +15,7 @@ This project is intentionally a little *over-engineered* – but in a fun way. I
 ### Development & Tooling
 
 * **Reproducible environment** – fully modular, Nix-based development setup and CI pipeline.
-* **Automated code quality checks** – ktlint, detekt, sqlfluff and more, enforced via CI and pre-commit hooks.
+* **Automated code quality checks** – ktlint, detekt, sqlfluff and more, enforced with treefmt in CI and via pre-commit hooks.
 * **Modern Gradle build** – parallel, cacheable, modular with convention plugins, version catalogs and more.
 
 ### Testing

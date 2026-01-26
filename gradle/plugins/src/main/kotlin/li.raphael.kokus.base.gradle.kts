@@ -33,7 +33,6 @@ idea {
         excludeDirs.addAll(
             setOf(
                 ".gradle",
-                ".pre-commit-config.yaml",
                 "result",
                 ".idea",
                 ".kotlin",
