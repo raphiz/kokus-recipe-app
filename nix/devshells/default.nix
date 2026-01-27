@@ -32,7 +32,13 @@ in {
           package = pkgs.ktlint.override {jre_headless = jdk;};
         };
 
-        # TODO: detekt
+        detekt = {
+          enable = true;
+          configFile = ../../detekt-config.yml;
+          # Reduce closure by overriding the JDK
+          package = pkgs.detekt.override {jre_headless = jdk;};
+        };
+
         # TODO: convco
 
         sqlfluff.enable = true;
