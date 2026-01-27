@@ -19,7 +19,7 @@ buildGradleApplication {
   installLocation = "app/assembly/build/install/*/";
 
   # TODO: filter!
-  src = ./../..;
+  src = ./..;
 
   meta = {
     license = lib.licenses.mit;
