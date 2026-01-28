@@ -18,8 +18,19 @@ buildGradleApplication {
   buildTask = ":assemble";
   installLocation = "app/assembly/build/install/*/";
 
-  # TODO: filter!
-  src = ./..;
+  src = let
+    fs = lib.fileset;
+  in
+    fs.toSource {
+      root = ./..;
+      fileset = fs.unions [
+        ./../app
+        ./../gradle
+        ./../build.gradle.kts
+        ./../gradle.properties
+        ./../settings.gradle.kts
+      ];
+    };
 
   meta = {
     license = lib.licenses.mit;
