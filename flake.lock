@@ -73,11 +73,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1769543998,
-        "narHash": "sha256-fLEAMT+I9hGYZ5xiqQchWHtn4JSVfAq2RjSNjpTL/Y8=",
+        "lastModified": 1769578495,
+        "narHash": "sha256-LD5iUd/iqgUdGlUu4Pjl12e/mwIFueFNPVM3GKftfN4=",
         "owner": "ergon",
         "repo": "nix-shell-parts",
-        "rev": "0b1fcfe65b8f6f941c32059d99162db6910d7ddc",
+        "rev": "4039f3166fa72784e31ce62f9c6e252c17425759",
         "type": "github"
       },
       "original": {

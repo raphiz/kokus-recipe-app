@@ -24,6 +24,14 @@
       nixpkgs.lib.genAttrs (import systems) (system: function system nixpkgs.legacyPackages.${system});
 
     version = self.shortRev or self.dirtyShortRev or "unknown";
+
+    shellConfigs = forAllSystems (
+      system: pkgs:
+        nix-shell-parts.lib.evalShell {inherit pkgs;} {
+          _module.args.kokus = self.packages.${system}.kokus;
+          imports = [./nix/devshell.nix];
+        }
+    );
   in {
     # === Packages ===
     packages = forAllSystems (system: pkgs: {
@@ -35,16 +43,9 @@
     });
 
     # === Dev Shells ===
-    devShells = forAllSystems (
-      system: pkgs: {
-        default = nix-shell-parts.lib.mkShell {inherit pkgs;} {
-          _module.args = {
-            kokus = self.packages.${system}.kokus;
-          };
-          imports = [./nix/devshell.nix];
-        };
-      }
-    );
+    devShells = forAllSystems (system: _pkgs: {
+      default = shellConfigs.${system}.finalPackage;
+    });
 
     # === NixOS Modules ===
     nixosModules = {
@@ -54,11 +55,18 @@
 
     # === Checks ===
     checks = forAllSystems (system: pkgs: {
+      treefmt = shellConfigs.${system}.treefmt.build.check self;
       module-test = import ./nix/nixos-module-test.nix {
         inherit pkgs;
         module = self.nixosModules.kokus;
         kokus = self.packages.${system}.kokus;
       };
     });
+
+    # === Formatter ===
+    formatter = forAllSystems (
+      system: _pkgs:
+        shellConfigs.${system}.treefmt.build.wrapper
+    );
   };
 }
