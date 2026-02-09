@@ -37,6 +37,9 @@ idea {
                 ".idea",
                 ".kotlin",
                 "build",
+                "bin",
+                ".jdk",
+                ".direnv",
                 "out",
             ).map { file(it) },
         )

@@ -6,7 +6,8 @@
 result
 result-*
 
-.bin
+bin
+.jdk
 
 # gradle
 .gradle/

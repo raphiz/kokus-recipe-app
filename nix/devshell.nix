@@ -17,6 +17,17 @@ in {
     treefmt-wrapper
   ];
 
+  # To make devcontainers work in intelliJ, we need a fixed path for JAVA_HOME and binaries (PATH)
+  # we link them in the workspace root.
+  profile.enable = true;
+  git.root.enable = true;
+  shellHook = let
+    jdkDir = "${config.git.root.shellVariable}/.jdk";
+  in ''
+    rm -rf "${jdkDir}"
+    ln -fs ${jdk.home} "${jdkDir}"
+  '';
+
   env."JAVA_HOME" = jdk.home;
 
   git.hooks.pre-commit-command = "${lib.getExe treefmt-wrapper} --fail-on-change $FILES";

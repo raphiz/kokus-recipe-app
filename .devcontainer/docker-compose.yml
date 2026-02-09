@@ -1,0 +1,8 @@
+services:
+    devcontainer:
+        image: mcr.microsoft.com/devcontainers/base:ubuntu
+        volumes:
+            - ..:/workspaces/kokus-recipe-app:cached
+        command: sleep infinity
+        depends_on:
+            - db
