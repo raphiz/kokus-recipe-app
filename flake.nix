@@ -6,16 +6,22 @@
 
     systems.url = "github:nix-systems/default";
 
+    treefmt-nix.url = "github:numtide/treefmt-nix";
+    treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
+
     nix-shell-parts.url = "github:ergon/nix-shell-parts";
     nix-shell-parts.inputs.nixpkgs.follows = "nixpkgs";
+    nix-shell-parts.inputs.treefmt-nix.follows = "treefmt-nix";
 
     build-gradle-application.url = "github:raphiz/buildGradleApplication";
     build-gradle-application.inputs.nixpkgs.follows = "nixpkgs";
+    build-gradle-application.inputs.systems.follows = "systems";
   };
 
   outputs = {
     self,
     nixpkgs,
+    treefmt-nix,
     systems,
     nix-shell-parts,
     build-gradle-application,
@@ -25,12 +31,12 @@
 
     version = self.shortRev or self.dirtyShortRev or "unknown";
 
-    shellConfigs = forAllSystems (
+    treefmtEval = forAllSystems (
       system: pkgs:
-        nix-shell-parts.lib.evalShell {inherit pkgs;} {
-          _module.args.kokus = self.packages.${system}.kokus;
-          imports = [./nix/devshell.nix];
-        }
+        treefmt-nix.lib.evalModule pkgs (import ./nix/treefmt.nix {
+          inherit pkgs;
+          inherit (self.packages.${system}) kokus;
+        })
     );
   in {
     # === Packages ===
@@ -43,8 +49,14 @@
     });
 
     # === Dev Shells ===
-    devShells = forAllSystems (system: _pkgs: {
-      default = shellConfigs.${system}.finalPackage;
+    devShells = forAllSystems (system: pkgs: {
+      default =
+        nix-shell-parts.lib.mkShell {inherit pkgs;}
+        {
+          _module.args.kokus = self.packages.${system}.kokus;
+          _module.args.treefmt-wrapper = treefmtEval.${system}.config.build.wrapper;
+          imports = [./nix/devshell.nix];
+        };
     });
 
     # === NixOS Modules ===
@@ -55,7 +67,7 @@
 
     # === Checks ===
     checks = forAllSystems (system: pkgs: {
-      treefmt = shellConfigs.${system}.treefmt.build.check self;
+      treefmt = treefmtEval.${system}.config.build.check self;
       module-test = import ./nix/nixos-module-test.nix {
         inherit pkgs;
         module = self.nixosModules.kokus;
@@ -65,8 +77,7 @@
 
     # === Formatter ===
     formatter = forAllSystems (
-      system: _pkgs:
-        shellConfigs.${system}.treefmt.build.wrapper
+      system: _pkgs: treefmtEval.${system}.config.build.wrapper
     );
   };
 }

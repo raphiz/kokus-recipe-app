@@ -4,6 +4,7 @@
   lib,
   pkgs,
   kokus,
+  treefmt-wrapper,
   ...
 }: let
   jdk = kokus.jdk;
@@ -13,35 +14,12 @@ in {
     kokus.updateVerificationMetadata
     gradle
     jdk
+    treefmt-wrapper
   ];
 
   env."JAVA_HOME" = jdk.home;
 
-  treefmt = {
-    enable = true;
-    pre-commit-hook = true;
-
-    programs = {
-      alejandra.enable = true;
-
-      ktlint = {
-        enable = true;
-        # Reduce closure by overriding the JDK
-        package = pkgs.ktlint.override {jre_headless = jdk;};
-      };
-
-      detekt = {
-        enable = true;
-        configFile = ../detekt-config.yml;
-        # Reduce closure by overriding the JDK
-        package = pkgs.detekt.override {jre_headless = jdk;};
-      };
-
-      sqlfluff.enable = true;
-
-      biome.enable = true;
-    };
-  };
+  git.hooks.pre-commit-command = "${lib.getExe treefmt-wrapper} --fail-on-change $FILES";
 
   scripts = {
     build.text = ''${lib.getExe gradle} :clean :check :assemble'';
