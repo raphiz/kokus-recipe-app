@@ -1,6 +1,6 @@
 services:
     devcontainer:
-        image: mcr.microsoft.com/devcontainers/base:ubuntu
+        image: mcr.microsoft.com/devcontainers/base:ubuntu@sha256:4bcb1b466771b1ba1ea110e2a27daea2f6093f9527fb75ee59703ec89b5561cb
         volumes:
             - ..:/workspaces/kokus-recipe-app:cached
         command: sleep infinity
