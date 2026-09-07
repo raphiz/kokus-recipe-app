@@ -10,7 +10,7 @@ plugins {
     kotlin("jvm")
 }
 
-val jvmTargetVersion = JvmTarget.maxSupportedUpTo(25)
+val jvmTargetVersion = JvmTarget.maxSupportedUpTo(26)
 
 kotlin {
     compilerOptions {
