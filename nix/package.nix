@@ -3,13 +3,13 @@
   version,
   pkgs,
   buildGradleApplication,
-  jdk25,
+  jdk27,
 }:
 buildGradleApplication {
   inherit version;
   pname = "kokus";
 
-  jdk = jdk25;
+  jdk = jdk27;
 
   env = {
     DB_SKIP = "true";
@@ -40,6 +40,6 @@ buildGradleApplication {
   gradle = pkgs.gradle-packages.mkGradle {
     version = "9.2.1";
     hash = "sha256-cvRMn468sa9Dg49F7lxKqcVESJizRoqz9K97YHbFvD8=";
-    defaultJava = jdk25;
+    defaultJava = jdk27;
   };
 }
